@@ -1,27 +1,20 @@
-# Map [![Build Status](https://travis-ci.org/markelog/trie.svg?branch=master)](https://travis-ci.org/markelog/trie) [![GoDoc](https://godoc.org/github.com/markelog/trie?status.svg)](https://godoc.org/github.com/markelog/trie) [![Go Report Card](https://goreportcard.com/badge/github.com/markelog/trie)](https://goreportcard.com/report/github.com/markelog/trie)
+# Trie [![Build Status](https://travis-ci.org/markelog/trie.svg?branch=master)](https://travis-ci.org/markelog/trie) [![GoDoc](https://godoc.org/github.com/markelog/trie?status.svg)](https://godoc.org/github.com/markelog/trie) [![Go Report Card](https://goreportcard.com/badge/github.com/markelog/trie)](https://goreportcard.com/report/github.com/markelog/trie) [![Coverage ](https://coveralls.io/repos/github/markelog/trie/badge.svg?branch=master)](https://coveralls.io/github/markelog/trie?branch=master)
 
 > Implementation of "Trie" data structure
 
 See https://en.wikipedia.org/wiki/Trie. Why yet another "trie" implementation?
 
 Some of them do not expose needed methods like traversing, some of them do not expose
-parents or children
-
-And some of them just plain peculiar. At least I think so :)
+parents or children. And some of them just plain peculiar. At least I think so :)
 
 ## Install
 ```sh
 go get github.com/markelog/trie
 ```
 
-## Documentation
-```sh
-go get github.com/markelog/trie
-```
-
 ## Usage
 
-Simple Example, see [docs](https://godoc.org/github.com/markelog/trie) for more methods and properties
+Simple example here, see [docs](https://godoc.org/github.com/markelog/trie) for more stuff and explanations
 
 
 ```go

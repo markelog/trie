@@ -4,4 +4,10 @@ os:
 
 language: go
 
+before_install:
+  - go get github.com/mattn/goveralls
+
+script:
+  - $GOPATH/bin/goveralls -service=travis-pro
+
 go: 1.9
