@@ -447,7 +447,7 @@ var _ = Describe("trie", func() {
 
 			i := 0
 			trie.Traverse(func(item *node.Node) bool {
-				i += 1
+				i++
 				return true
 			})
 
@@ -463,7 +463,7 @@ var _ = Describe("trie", func() {
 
 			i := 0
 			trie.Traverse(func(item *node.Node) bool {
-				i += 1
+				i++
 				return false
 			})
 
@@ -483,7 +483,7 @@ var _ = Describe("trie", func() {
 
 			i := 0
 			trie.Visit(noda, func(item *node.Node) bool {
-				i += 1
+				i++
 				return true
 			})
 
@@ -499,7 +499,7 @@ var _ = Describe("trie", func() {
 
 			i := 0
 			trie.Visit(trie.Root, func(item *node.Node) bool {
-				i += 1
+				i++
 				return false
 			})
 
@@ -519,7 +519,7 @@ var _ = Describe("trie", func() {
 
 			i := 0
 			trie.VisitAll(noda, func(item *node.Node) bool {
-				i += 1
+				i++
 				return true
 			})
 
@@ -535,7 +535,7 @@ var _ = Describe("trie", func() {
 
 			i := 0
 			trie.VisitAll(trie.Root, func(item *node.Node) bool {
-				i += 1
+				i++
 				return false
 			})
 
