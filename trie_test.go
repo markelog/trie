@@ -216,16 +216,15 @@ var _ = Describe("trie", func() {
 			Expect(parent.Children).To(BeEmpty())
 		})
 
-		It("should remove all references from the branches", func() {
+		FIt("should remove all references from the branches", func() {
 			trie := New()
 
 			target := trie.Add("target", nil)
 
 			trie.Remove("target")
 
-			Expect(target.ImmediateParent.Parent).To(BeNil())
-			Expect(target.ImmediateParent.Keys).To(BeEmpty())
-			Expect(target.ImmediateParent.ImmediateParent.Keys).To(BeEmpty())
+			Expect(target.Parent).To(BeNil())
+			Expect(target.ImmediateParent).To(BeNil())
 		})
 
 		It("should not remove the full subtree of there is still children in it", func() {
