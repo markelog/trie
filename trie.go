@@ -87,19 +87,13 @@ func (trie *Trie) Add(key string, value interface{}) (result *node.Node) {
 
 // Remove removes subtree of the exact key match
 func (trie *Trie) Remove(key string) bool {
-	nodes := trie.Search(key)
+	target := trie.Find(key)
 
 	// If there is no key like that in the trie
-	if len(nodes) == 0 {
+	if target == nil {
 		return false
 	}
 
-	// If key is not exact match
-	if nodes[0].Key != key {
-		return false
-	}
-
-	target := nodes[0]
 	parent := target.Parent
 	immediate := target.ImmediateParent
 
@@ -125,8 +119,46 @@ func (trie *Trie) Remove(key string) bool {
 
 	// Set parent to nil, since we are no longer part of the trie
 	target.Parent = nil
+	target.ImmediateParent = nil
 
 	// And decrease the size
+	trie.Size--
+
+	return true
+}
+
+// Yank removes only one leaf
+// Difference with Remove() is that Yank does not removes the leaf subtree.
+// Still removes the branches
+func (trie *Trie) Yank(key string) bool {
+	target := trie.Find(key)
+
+	// If there is no key like that in the trie
+	if target == nil {
+		return false
+	}
+
+	parent := target.Parent
+
+	// Check is we have leafs forward down the tree
+	childExist := false
+	trie.Visit(target, func(item *node.Node) bool {
+		childExist = true
+		return false
+	})
+
+	// If we does not have anything valuable afterwards, then just remove it
+	if childExist == false {
+		return trie.Remove(key)
+	}
+
+	// Otherwise replace leaf with the branch
+	target.Leaf = false
+	for _, element := range target.Children {
+		element.Parent = parent
+	}
+	target.Children = []*node.Node{}
+
 	trie.Size--
 
 	return true

@@ -192,6 +192,7 @@ var _ = Describe("trie", func() {
 			trie.Remove("target")
 
 			Expect(target.Parent).To(BeNil())
+			Expect(target.ImmediateParent).To(BeNil())
 		})
 
 		It("should change the tree size", func() {
@@ -216,7 +217,7 @@ var _ = Describe("trie", func() {
 			Expect(parent.Children).To(BeEmpty())
 		})
 
-		FIt("should remove all references from the branches", func() {
+		It("should remove all references from the branches", func() {
 			trie := New()
 
 			target := trie.Add("target", nil)
@@ -256,6 +257,103 @@ var _ = Describe("trie", func() {
 
 			Expect(trie.Search("tar")).To(HaveLen(1))
 			Expect(trie.Search("tar")[0].Key).To(Equal("tar"))
+		})
+	})
+
+	Describe("Yank", func() {
+		It("should not change the tree if key is not present", func() {
+			trie := New()
+
+			trie.Add("test", 1)
+
+			result := trie.Yank("tset")
+
+			Expect(result).To(Equal(false))
+			Expect(trie.Size).To(Equal(1))
+		})
+
+		It("should not change the tree if key is not present", func() {
+			trie := New()
+
+			trie.Add("test", 1)
+
+			result := trie.Yank("tset")
+
+			Expect(result).To(Equal(false))
+			Expect(trie.Size).To(Equal(1))
+		})
+
+		It("should not remove the key with half prefix", func() {
+			trie := New()
+
+			trie.Add("test", 1)
+
+			result := trie.Yank("t")
+
+			Expect(result).To(Equal(false))
+			Expect(trie.Size).To(Equal(1))
+		})
+
+		It("should nullify parent of the target", func() {
+			trie := New()
+
+			trie.Add("t", nil)
+			target := trie.Add("target", nil)
+
+			trie.Yank("target")
+
+			Expect(target.Parent).To(BeNil())
+			Expect(target.ImmediateParent).To(BeNil())
+		})
+
+		It("should remove only specific node", func() {
+			trie := New()
+
+			// I don't have good imagination for these names :/
+			trie.Add("t", nil)
+			trie.Add("targ", nil)
+			trie.Add("target", nil)
+			trie.Add("targos", nil)
+			trie.Add("targetos", nil)
+
+			trie.Yank("targ")
+
+			Expect(trie.Find("target").Parent.Key).To(Equal("t"))
+			Expect(trie.Find("targos").Parent.Key).To(Equal("t"))
+			Expect(trie.Find("targetos").Parent.Key).To(Equal("target"))
+
+			Expect(trie.Find("targ")).To(BeNil())
+
+			Expect(trie.Size).To(Equal(4))
+
+			exist := false
+			isCorrect := false
+			trie.VisitAll(trie.Root, func(item *node.Node) bool {
+				if item.Key == "targ" {
+					exist = true
+					isCorrect = item.Leaf == false
+					return false
+				}
+
+				return true
+			})
+
+			Expect(exist).To(Equal(true))
+			Expect(isCorrect).To(Equal(true))
+		})
+
+		It("should remove specific node and all branches as well", func() {
+			trie := New()
+
+			// I don't have good imagination for these names :/
+			t := trie.Add("t", nil)
+			trie.Add("targetos", nil)
+
+			trie.Yank("targetos")
+
+			Expect(t.Keys).To(HaveLen(0))
+			Expect(t.Children).To(HaveLen(0))
+			Expect(trie.Size).To(Equal(1))
 		})
 	})
 
