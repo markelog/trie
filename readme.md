@@ -42,7 +42,7 @@ func main() {
 	cool := results[0]
 
 	println(cool.Value.(string))  // "So cool"
-	println(cool.Children[0].Key) // coolio
+	println(cool.Children[0].Key) // "coolio"
 
 	coolio := tree.Find("coolio")
 
