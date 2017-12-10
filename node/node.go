@@ -9,8 +9,11 @@ type Node struct {
 	// Value of the node
 	Value interface{}
 
-	// Parent of the node
+	// Parent leaf of the node
 	Parent *Node
+
+	// ImmediateParent might not be a branch
+	ImmediateParent *Node
 
 	// Children of the node
 	Children []*Node
@@ -25,11 +28,11 @@ type Node struct {
 // New returns new Node (so we wouldn't have to define so many params)
 func New(key string, value interface{}) *Node {
 	return &Node{
-		Key:      []byte(key),
+		Key:      key,
 		Value:    value,
 		Parent:   nil,
 		Children: []*Node{},
-		Keys:     map[byte]*Node{},
+		Keys:     map[string]*Node{},
 		Leaf:     false,
 	}
 }

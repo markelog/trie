@@ -11,19 +11,19 @@ import (
 var _ = Describe("node", func() {
 	Describe("New", func() {
 		It("should properly create new node", func() {
-			Skip("test")
 			new := New("test", 1)
 
 			expected := `&node.Node{
-			  Key: "test",
-			  Value: 1,
-			  Parent: nil,
-			  Children: []*node.Node{}
-			,
-			  Keys: map[string]*node.Node{
-			  },
-			  Leaf: false,
-			}`
+  Key: "test",
+  Value: 1,
+  Parent: nil,
+  ImmediateParent: nil,
+  Children: []*node.Node{}
+,
+  Keys: map[string]*node.Node{
+  },
+  Leaf: false,
+}`
 
 			Expect(litter.Sdump(new)).To(Equal(expected))
 		})
