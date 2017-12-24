@@ -6,6 +6,7 @@ import "github.com/markelog/trie/node"
 
 // Trie essential structure
 type Trie struct {
+
 	// Root node
 	Root *node.Node
 

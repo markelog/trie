@@ -9,5 +9,5 @@ import (
 
 func TestRequest(t *testing.T) {
 	RegisterFailHandler(Fail)
-	RunSpecs(t, "Node Suite")
+	RunSpecs(t, "Trie Suite")
 }

@@ -3,6 +3,7 @@ package node_test
 import (
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
+
 	"github.com/sanity-io/litter"
 
 	. "github.com/markelog/trie/node"

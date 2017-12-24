@@ -3,6 +3,7 @@ package node
 
 // Node stores essential node data
 type Node struct {
+
 	// Key of the node
 	Key string
 
