@@ -13,7 +13,7 @@ type Node struct {
 	// Parent leaf of the node
 	Parent *Node
 
-	// ImmediateParent might not be a branch
+	// ImmediateParent might be a branch or a leaf
 	ImmediateParent *Node
 
 	// Children of the node
@@ -22,7 +22,7 @@ type Node struct {
 	// Keys of children
 	Keys map[string]*Node
 
-	// Leaf is it?
+	// Leaf, is it?
 	Leaf bool
 }
 
