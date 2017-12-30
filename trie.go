@@ -128,9 +128,9 @@ func (trie *Trie) Remove(key string) bool {
 	return true
 }
 
-// Yank removes only one leaf
-// Difference with Remove() is that Yank does not removes the leaf subtree.
-// Still removes the branches
+// Yank removes only one leaf not the subtree.
+// Difference with Remove() is that Yank does not removes the leaf subtree,
+// still removes the branches though
 func (trie *Trie) Yank(key string) bool {
 	target := trie.Find(key)
 
